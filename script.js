@@ -26,7 +26,7 @@ $(document).ready(function() {
                 // 2. Storing data in sessionStorage to access on another page
                 // localStorage.setItem('userData', JSON.stringify(response.user));
 
-                // Pass data via URL parameters
+                // 3. Pass data via URL parameters
                 window.location.href = `profile2.html?name=${response.user.username}&email=${response.user.email}`;
 
                 // Redirect to another HTML page
