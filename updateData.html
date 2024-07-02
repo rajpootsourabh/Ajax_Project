@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>User Profile</h1>
+    <div>
+        <p>Name: <span id="name"></span></p>
+        <p>Age: <span id="age"></span></p>
+    </div>
+
+    <h2>Update Profile</h2>
+    <form id="updateForm">
+        <label for="newName">New Name:</label>
+        <input type="text" id="newName" name="newName">
+        <br>
+        <label for="newAge">New Age:</label>
+        <input type="number" id="newAge" name="newAge">
+        <br>
+        <button type="submit">Update</button>
+    </form>
+
+    <script>
+        $(document).ready(function() {
+            // Retrieve user data from sessionStorage
+            const userData = JSON.parse(sessionStorage.getItem('userData'));
+
+            if (userData) {
+                $('#name').text(userData.name);
+                $('#age').text(userData.age);
+            } else {
+                console.error('No user data found');
+            }
+
+            // Handle update form submission
+            $('#updateForm').submit(function(event) {
+                event.preventDefault();
+
+                const newName = $('#newName').val();
+                const newAge = $('#newAge').val();
+
+                const updatedData = {
+                    ...userData,
+                    name: newName,
+                    age: newAge
+                };
+
+                $.ajax({
+                    url: 'http://localhost:5000/api/update',
+                    type: 'PUT', // Assuming you use PUT for updates
+                    contentType: 'application/json',
+                    data: JSON.stringify(updatedData),
+                    success: function(response) {
+                        console.log('Update Success:', response);
+                        // Update the displayed data
+                        $('#name').text(newName);
+                        $('#age').text(newAge);
+                        alert('Profile updated successfully!');
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Update Error:', error);
+                        alert('Failed to update profile.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
