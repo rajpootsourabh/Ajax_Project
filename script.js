@@ -16,10 +16,23 @@ $(document).ready(function() {
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(data),
+
             success: function(response) {
                 console.log('Success:', response);
-                // Handle success
-                alert('Login successful!');
+    
+                // 1. Storing data in sessionStorage to access on another page
+                // sessionStorage.setItem('userData', JSON.stringify(response.user));
+
+                // 2. Storing data in sessionStorage to access on another page
+                // localStorage.setItem('userData', JSON.stringify(response.user));
+
+                // Pass data via URL parameters
+                window.location.href = `profile2.html?name=${response.user.username}&email=${response.user.email}`;
+
+                // Redirect to another HTML page
+                // window.location.href = 'profile2.html';
+
+                // alert('Login successful!');
             },
             error: function(xhr, status, error) {
                 console.error('Error:', error);
