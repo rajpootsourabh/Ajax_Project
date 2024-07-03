@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Register</h1>
+    <form id="registerForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <button type="submit">Register</button>
+    </form>
+
+    <script>
+        $(document).ready(function() {
+            $('#registerForm').submit(function(event) {
+                event.preventDefault();
+
+                const username = $('#username').val();
+                const password = $('#password').val();
+
+                const data = { username: username, password: password };
+
+                $.ajax({
+                    url: 'http://localhost:5000/api/register',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(data),
+                    success: function(response) {
+                        console.log('Registration Success:', response);
+                        alert('Registration successful!');
+                        // Redirect to login page after successful registration
+                        window.location.href = 'index.html';
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Registration Error:', error);
+                        alert('Registration failed. Please try again.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

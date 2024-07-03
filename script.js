@@ -16,6 +16,10 @@ $(document).ready(function() {
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(data),
+            // Add token
+            // headers: {
+            //     'Authorization': `Bearer ${token}`  // Include the token in the Authorization header
+            // },
 
             success: function(response) {
                 console.log('Success:', response);
