@@ -10,7 +10,6 @@ $(document).ready(function() {
             password: password
         };
 
-        // Replace 'https://example.com/api/login' with your actual API endpoint
         $.ajax({
             url: 'http://localhost:5000/login',
             type: 'POST',

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>User List</h1>
+    <table id="userTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Website</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        $(document).ready(function() {
+            // Make an AJAX request to fetch data
+            $.ajax({
+                url: 'https://jsonplaceholder.typicode.com/users', // Example API endpoint
+                type: 'GET',
+                success: function(data) {
+                    console.log('Data fetched:', data);
+                    // Call a function to render the data in a table
+                    renderUsers(data);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching data:', error);
+                    alert('Failed to fetch data. Please try again.');
+                }
+            });
+
+            // Function to render user data in a table
+            function renderUsers(users) {
+                const tableBody = $('#userTable tbody');
+                tableBody.empty(); // Clear previous data
+
+                // Iterate over each user and create table rows
+                users.forEach(function(user) {
+                    const row = `
+                        <tr>
+                            <td>${user.name}</td>
+                            <td>${user.email}</td>
+                            <td>${user.phone}</td>
+                            <td>${user.website}</td>
+                        </tr>
+                    `;
+                    tableBody.append(row);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
