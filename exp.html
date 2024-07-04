@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="exp.css">
+    <script src="exp.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <button id="toggle-button" onclick="toggleSidebar()"><i class="fa-solid fa-expand"></i></button>
+        <div class="menu-item">
+            <i class="fas fa-home"></i>
+            <span class="menu-text">Home</span>
+        </div>
+        <div class="menu-item" onclick="toggleSubmenu('account-menu')">
+            <i class="fas fa-user"></i>
+            <span class="menu-text">Account</span>
+            <i class="fas fa-chevron-down submenu-arrow"></i>
+        </div>
+        <div id="account-menu" class="submenu">
+            <div class="submenu-item">
+                <i class="fas fa-cogs"></i>
+                <span class="submenu-text">Manage Account</span>
+            </div>
+            <div class="submenu-item">
+                <i class="fas fa-map"></i>
+                <span class="submenu-text">Manage Geography</span>
+            </div>
+        </div>
+        <div class="menu-item">
+            <i class="fas fa-sign-out-alt"></i>
+            <span class="menu-text">Logout</span>
+        </div>
+    </div>
+    <div class="main-content">
+        <!-- Your main content goes here -->
+    </div>
+</body>
+</html>
